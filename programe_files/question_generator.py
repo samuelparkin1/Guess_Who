@@ -2,34 +2,15 @@ import random
 from typing import Coroutine
 from user_data import player_genders, player_eye_colours, player_hair_colours
 from filter import x,test_yes, test_no
+temporary_players =[]
 temporary_eye_colour =[]
-random_eye_colour =[]
 temporary_hair_colour=["Black", "Brown", "Blonde", "White", "Grey", "Red", "Pink", "Purple", "Blue", "Green", "Yellow"]
-temporary_gender=[]
+temporary_gender=["Male", "Female", "Other"]
+temporary_bald = ["Yes", "No"]
+temporary_glasses = ["Yes", "No"]
+temporary_facial_hair = ["Yes", "No"]
 answer_options= ("Yes", "No")
-
 question_countdown = 10
-
-# name = []
-
-# player_genders= {}
-# genders=("Male", "Female", "Other")
-
-# player_eye_colours = {'john':"green", 'sam': "green", 'tom': "blue", 'jim': "brown"}
-# eye_colours = ("Amber","Blue","Brown", "Gray", "Green", "Hazel")
-
-# player_hair_colours = {}
-# hair_colours =("Black", "Brown", "Blonde", "White", "Grey", "Red", "Pink", "Purple", "Blue", "Green", "Yellow")
-
-# players_glasses ={}
-# glasses_options = ("Yes", "No")
-
-# players_bald ={}
-# bald_options=("Yes","No")
-
-# players_facial_hair ={}
-# facial_hair_options=("Yes","No")
-
 
 # This function is to generate a tempory lists. 
 # It takes fasical catgoryies and makes a list of the differnt options within then.  
@@ -49,17 +30,17 @@ def question_generator(question, function):
                 global question_list, question_countdown
                 question_list.remove(function)
                 question_countdown -= 1
-                print ("yes")
+                break
             else:
                 question_countdown -= 1
-                print ("no")
-            break
+                break
+            
 
 def eye_question():
     try:
         random_eye_colour = random.choice(temporary_eye_colour)
         temporary_eye_colour.remove(random_eye_colour)
-        question = (f"Do you have {random_eye_colour} eyes?")
+        question = (f"Do you have {random_eye_colour} eyes? ")
         question_generator(question, eye_question)
     except IndexError:
         question_list.remove(eye_question)
@@ -67,30 +48,50 @@ def eye_question():
 
 def hair_question():
     try:
-        global random_hair_colour
         random_hair_colour = random.choice(temporary_hair_colour)
         temporary_hair_colour.remove(random_hair_colour)
-        question = (f"Do you have {random_hair_colour} Hair?")
+        question = (f"Do you have {random_hair_colour} Hair? ")
         question_generator(question, hair_question)
     except IndexError:
         question_list.remove(hair_question)
         print("hmm.. I can't think of any other hair colour")
-        
-    
 
-# def bald_question():
+def gender_question():
+    try:
+        random_gender = random.choice(temporary_gender)
+        temporary_gender.remove(random_gender)
+        question = (f"Would you classify your gender as {random_gender}? ")
+        question_generator(question, gender_question)
+    except IndexError:
+        question_list.remove(gender_question)
+        print("hmm.. I can't think of any other genders")
 
+def bald_question():
+    try:
+        question = (f"Are you bald? ")
+        question_generator(question, bald_question)
+        question_list.remove(bald_question)
+    except IndexError:
+        question_list.remove(bald_question)
+        print("hmm.. I can't remember if you had hair or not")
 
-# def glasses_question():
+def glasses_question():
+    try:
+        question = (f"Do you wear glasses? ")
+        question_generator(question, glasses_question)
+        question_list.remove(glasses_question)
+    except IndexError:
+        question_list.remove(glasses_question)
+        print("hmm.. I can't remember if you wear glasses or not")
 
-# def facial_hair_question():
-
-# def gender_question():
-
-
-
-
-
+def facial_hair_question():
+    try:
+        question = (f"Do you have facial hair? ")
+        question_generator(question, facial_hair_question)
+        question_list.remove(facial_hair_question)
+    except IndexError:
+        question_list.remove(facial_hair_question)
+        print("hmm.. I can't remember if you had facial hair")
 
 
 # Gererate a temporary list of possible eye colours.  
@@ -103,57 +104,13 @@ temporary_list(player_hair_colours,temporary_hair_colour)
 temporary_list(player_genders,temporary_gender)
 
 
-question_list = [eye_question, hair_question]
-#  gender_question, bald_question, glasses_question, facial_hair_question]
-#select a question at random  
-next_question = random.choice(question_list)
-  #Mixes the items in "questions" into a random order
+question_list = [eye_question, hair_question, gender_question, bald_question, glasses_question, facial_hair_question]
+#select a question at random 
 
-
-# print (questions[0])
-# print (questions[1])
-# print (questions[2])
-try:
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-    random.choice(question_list)()
-except IndexError:
-    "I've run out of question...."
+for i in range(100):
+    try:
+        random.choice(question_list)()  
+    except IndexError:
+        print ("I've run out of question....")
+        break
 
