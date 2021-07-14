@@ -152,55 +152,66 @@ def facial_hair_question():
         question_list.remove(facial_hair_question)
         print("hmm.. I can't remember if you had facial hair")
 
-# Gererate a temporary list of players.
-temporary_player_list(players,temporary_players_options)
 
-# Gererate a temporary list of possible eye colours.  
-temporary_list(player_eye_colours,temporay_eye_colour_options)
+    #Ask the user if they're ready to play.
+    play_agin = "Yes"
+    player_ready = input ("Ready to play guess who?")
+    while player_ready == "Yes" and play_agin == "Yes":
+        
+        feature_guesses = 0
 
-# Gererate a temporary list of passible hair colours. 
-temporary_list(player_hair_colours,temporary_hair_colour_options)
+        # Gererate a temporary list of players.
+        temporary_player_list(players,temporary_players_options)
 
-# Gererate a temporary list of passible hair colours. 
-temporary_list(player_genders,temporary_gender_options)
+        # Gererate a temporary list of possible eye colours.  
+        temporary_list(player_eye_colours,temporay_eye_colour_options)
 
-# Gererate a temporary list of passible glasses options 
-temporary_list(player_glasses,temporary_glasses_options)
+        # Gererate a temporary list of passible hair colours. 
+        temporary_list(player_hair_colours,temporary_hair_colour_options)
 
-# Gererate a temporary list of passible bald options. 
-temporary_list(players_bald,temporary_bald_options)
+        # Gererate a temporary list of passible hair colours. 
+        temporary_list(player_genders,temporary_gender_options)
 
-# Gererate a temporary list of passible facial hair options.
-temporary_list(players_facial_hair,temporary_facial_hair_options)
+        # Gererate a temporary list of passible glasses options 
+        temporary_list(player_glasses,temporary_glasses_options)
 
-#This is a list of the question functions that input into the question generator.
-question_list = [eye_question, hair_question, gender_question, bald_question, glasses_question, facial_hair_question]
+        # Gererate a temporary list of passible bald options. 
+        temporary_list(players_bald,temporary_bald_options)
 
-# print (temporary_players_options)
-# print (temporary_eye_colour_options)
-# print (temporary_hair_colour_options)
-# print (temporary_gender_options)
-# print (temporary_bald_options)
-# print (temporary_glasses_options)
-# print (temporary_facial_hair_options)
-print (int(feature_guesses))
+        # Gererate a temporary list of passible facial hair options.
+        temporary_list(players_facial_hair,temporary_facial_hair_options)
 
-# This picks a question function from the question list at random
-while True:
-    try:
-        if int(feature_guesses) < 3 and len (question_list) > 1 and len(temporary_players_options) > 1:
-            random.choice(question_list)()
-            print (int(feature_guesses))
-                
-        else:
-            if len(temporary_players_options) > 1:
-                name_question()
-            else:
-                print("Seems like you slipped my detection")
-                break                     
- 
-    except IndexError:
-        print ("I've run out of question....")
-        break
-    
-print ("loop complete")
+        #This is a list of the question functions that input into the question generator.
+        question_list = [eye_question, hair_question, gender_question, bald_question, glasses_question, facial_hair_question]
+
+        # print (temporary_players_options)
+        # print (temporary_eye_colour_options)
+        # print (temporary_hair_colour_options)
+        # print (temporary_gender_options)
+        # print (temporary_bald_options)
+        # print (temporary_glasses_options)
+        # print (temporary_facial_hair_options)
+        print (int(feature_guesses))
+
+        # This loops starts asking the user random questions.
+        
+        while True:
+            try:
+                if int(feature_guesses) < 3 and len (question_list) > 1 and len(temporary_players_options) > 2:
+                    random.choice(question_list)()
+                    print (int(feature_guesses))
+                        
+                else:
+                    if len(temporary_players_options) > 0:
+                        if name_question() == True:
+                            break                
+                    else:
+                        print("Seems like you slipped my detection")
+                        break                     
+        
+            except IndexError:
+                print ("I've run out of question....")
+                break
+
+        play_agin = input ("Play again?")      
+
