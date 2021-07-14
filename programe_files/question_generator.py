@@ -1,14 +1,14 @@
 import random
 from typing import Coroutine
 from user_data import players, player_genders, player_eye_colours, player_hair_colours, player_glasses, players_bald, players_facial_hair
-from filter import x,test_yes, test_no
-temporary_players =[]
-temporary_eye_colour =[]
-temporary_hair_colour=[]
-temporary_gender=[]
-temporary_bald = []
-temporary_glasses = []
-temporary_facial_hair = []
+#from filter import x,test_yes, test_no
+temporary_players_options =[]
+temporary_eye_colour_options =[]
+temporary_hair_colour_options=[]
+temporary_gender_options=[]
+temporary_bald_options = []
+temporary_glasses_options = []
+temporary_facial_hair_options = []
 answer_options= ("Yes", "No")
 question_countdown = 10
 
@@ -26,18 +26,31 @@ def temporary_list(data, temp_list):
 
 
 # This function is to generate random question for the user to answer.
-def question_generator(question, function):
+def question_generator(question_to_user, question_function, user_data, option):
         while True:
-            answer = input (question).capitalize()
+            answer = input (question_to_user).capitalize()
             if answer not in answer_options:
                 print ("Please type Yes or No")
             elif answer == "Yes":
+                #This loop will remove any players name that DONT match to uses answer.
+                players_to_remove = [name for (name, value) in user_data.items() if value != option]
+                for names in players_to_remove:
+                    if names in temporary_players_options:
+                        temporary_players_options.remove(names)
+                #Because the player does match the criteria the question shouldn't be asked again.
                 global question_list, question_countdown
-                if function in question_list:
-                    question_list.remove(function)
+                if question_function in question_list:
+                    question_list.remove(question_function)
+                print (temporary_players_options)  
                 question_countdown -= 1
                 break
             else:
+                #This loop will remove any players name that DO match to uses answer
+                players_to_remove = [name for (name, value) in user_data.items() if value == option]
+                for names in players_to_remove:
+                    if names in temporary_players_options:
+                        temporary_players_options.remove(names)
+                print (temporary_players_options)
                 question_countdown -= 1
                 break
             
@@ -45,22 +58,22 @@ def question_generator(question, function):
 # Once the eye colour is asked it will remove it from the list so not to asked again  
 def eye_question():
     try:
-        random_eye_colour = random.choice(temporary_eye_colour)
-        temporary_eye_colour.remove(random_eye_colour)
+        random_eye_colour = random.choice(temporary_eye_colour_options)
+        temporary_eye_colour_options.remove(random_eye_colour)
         question = (f"Do you have {random_eye_colour} eyes? ")
-        question_generator(question, eye_question)
+        question_generator(question, eye_question, player_eye_colours, random_eye_colour)
     except IndexError:
-        question_list.remove(eye_question)
+        question_list.remove(eye_question)        
         print("hmm.. I can't think of any other eye colours")
 
 # This function will choose a random hair colour from the temporary_hair_colour list.
 # Once the hair colour is asked it will remove it from the list so not to asked again.
 def hair_question():
     try:
-        random_hair_colour = random.choice(temporary_hair_colour)
-        temporary_hair_colour.remove(random_hair_colour)
+        random_hair_colour = random.choice(temporary_hair_colour_options)
+        temporary_hair_colour_options.remove(random_hair_colour)
         question = (f"Do you have {random_hair_colour} Hair? ")
-        question_generator(question, hair_question)
+        question_generator(question, hair_question, player_hair_colours, random_hair_colour)
     except IndexError:
         question_list.remove(hair_question)
         print("hmm.. I can't think of any other hair colour")
@@ -69,10 +82,10 @@ def hair_question():
 # Once the gender has been asked it will remove it from the list so not to asked again.
 def gender_question():
     try:
-        random_gender = random.choice(temporary_gender)
-        temporary_gender.remove(random_gender)
+        random_gender = random.choice(temporary_gender_options)
+        temporary_gender_options.remove(random_gender)
         question = (f"Would you classify your gender as {random_gender}? ")
-        question_generator(question, gender_question)
+        question_generator(question, gender_question, player_genders, random_gender)
     except IndexError:
         question_list.remove(gender_question)
         print("hmm.. I can't think of any other genders")
@@ -82,7 +95,7 @@ def gender_question():
 def bald_question():
     try:
         question = (f"Are you bald? ")
-        question_generator(question, bald_question)
+        question_generator(question, bald_question, players_bald,"Yes")
         if  bald_question in question_list:
             question_list.remove(bald_question)
     except IndexError:
@@ -95,7 +108,7 @@ def bald_question():
 def glasses_question():
     try:
         question = (f"Do you wear glasses? ")
-        question_generator(question, glasses_question)
+        question_generator(question, glasses_question, player_glasses, "Yes")
         if glasses_question in question_list:
             question_list.remove(glasses_question)
     except IndexError:
@@ -108,7 +121,7 @@ def glasses_question():
 def facial_hair_question():
     try:
         question = (f"Do you have facial hair? ")
-        question_generator(question, facial_hair_question)
+        question_generator(question, facial_hair_question, player_hair_colours, "Yes")
         if facial_hair_question in question_list:
             question_list.remove(facial_hair_question)
     except IndexError:
@@ -117,41 +130,45 @@ def facial_hair_question():
 
 
 # Gererate a temporary list of players.
-temporary_player_list(players,temporary_players)
+temporary_player_list(players,temporary_players_options)
 
 # Gererate a temporary list of possible eye colours.  
-temporary_list(player_eye_colours,temporary_eye_colour)
+temporary_list(player_eye_colours,temporary_eye_colour_options)
 
 # Gererate a temporary list of passible hair colours. 
-temporary_list(player_hair_colours,temporary_hair_colour)
+temporary_list(player_hair_colours,temporary_hair_colour_options)
 
 # Gererate a temporary list of passible hair colours. 
-temporary_list(player_genders,temporary_gender)
+temporary_list(player_genders,temporary_gender_options)
 
 # Gererate a temporary list of passible glasses options 
-temporary_list(player_glasses,temporary_glasses)
+temporary_list(player_glasses,temporary_glasses_options)
 
 # Gererate a temporary list of passible bald options. 
-temporary_list(players_bald,temporary_bald)
+temporary_list(players_bald,temporary_bald_options)
 
 # Gererate a temporary list of passible facial hair options.
-temporary_list(players_facial_hair,temporary_facial_hair)
+temporary_list(players_facial_hair,temporary_facial_hair_options)
 
 #This is a list of the question fuctions that input into the question generator.
 question_list = [eye_question, hair_question, gender_question, bald_question, glasses_question, facial_hair_question]
 
-print (temporary_players)
-print (temporary_eye_colour)
-print (temporary_hair_colour)
-print (temporary_gender)
-print (temporary_bald)
-print (temporary_glasses)
-print (temporary_facial_hair)
+# print (temporary_players_options)
+# print (temporary_eye_colour_options)
+# print (temporary_hair_colour_options)
+# print (temporary_gender_options)
+# print (temporary_bald_options)
+# print (temporary_glasses_options)
+# print (temporary_facial_hair_options)
 
 # This pick a question function from the question list at random
-for i in range(100):
+while True:
     try:
-        random.choice(question_list)()  
+        if len(question_list) >1:
+            random.choice(question_list)()
+        else:
+            print ("I must of miss heard one of you're answers.. I'm not sure who you are")
+            break
     except IndexError:
         print ("I've run out of question....")
         break
