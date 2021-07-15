@@ -1,32 +1,21 @@
 #list of people
-who=[['Alex'],['Alfred'],['Anita'],['Anne'],['Bernard'],['Bill'],['Charley'],['Claire'],
-['David'],['Eric'],['Frans'],['Goeroge'], ['Herman'],['Joe'], ['Maria'],['Max'], ['Paul'],
- ['Peter'], ['Philip'], ['Richard'], ['Robert'], ['Sam'], ['Susan'], ['Tom']]
-
-
+players= ['Liam', 'Noah', 'Oliver', 'Elijah', 'William', 'James', 'Benjamin', 'Lucas', 'Henry', 'Alexander', 
+'Olivia', 'Emma', 'Ava', 'Charlotte', 'Sophia', 'Amelia', 'Isabella', 'Mia', 'Evelyn', 'Harper', 'Charlie', 'Casey', 'Stevie', 
+'Remy', 'Finley', 'Monroe', 'Jodie', 'Skyler', 'Jude']
 
 #list of descritions
-eyes = {'john':"green", 'sam': "green", 'tom': "blue", 'jim': "brown"}
-hair = {'john':"brown", 'sam': "black", 'tom': "blond", 'jim': "red"}
+player_eye_colours = {
+    'Liam': 'Green', 'Noah': 'Grey', 'Oliver': 'Blue', 'Elijah': 'Grey', 'William': 'Blue', 'James': 'Blue', 'Benjamin': 'Grey', 
+    'Lucas': 'Green', 'Henry': 'Green', 'Alexander': 'Amber', 'Olivia': 'Green', 'Emma': 'Blue', 'Ava': 'Blue', 'Charlotte': 'Grey', 
+    'Sophia': 'Grey', 'Amelia': 'Hazel', 'Isabella': 'Grey', 'Mia': 'Blue', 'Evelyn': 'Grey', 'Harper': 'Grey', 'Charlie': 'Amber', 
+    'Casey': 'Hazel', 'Stevie': 'Amber', 'Remy': 'Grey', 'Finley': 'Hazel', 'Monroe': 'Brown', 'Jodie': 'Grey', 'Skyler': 'Grey', 
+    'Jude': 'Hazel'}
 
-# random descriptions
-x = "brown"
-random_word = "hair"
+result = [name for (name, value) in player_eye_colours.items() if value != "Brown"]
+for i in result:
+    if i in players:
+        players.remove(i)
 
-#guesswho_tester
-
-def test_yes(t,y):
-    result = [name for (name, value) in t.items() if value == y]
-    return (result)
-
-def test_no(t,y):
-    result = [name for (name, value) in t.items() if value == y]
-    for i in result:
-        result=i
-    return str (result)
+print (players)
 
 
-#who.remove (test_yes(eyes,"brown"))
-#who.remove (test_yes(hair,"blond"))
-print (test_yes(eyes,"green"))
-print (who)

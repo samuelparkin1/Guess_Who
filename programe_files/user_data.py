@@ -1,6 +1,6 @@
 name = []
 
-players= ['Liam', 'Noah', 'Liam', 'Noah', 'Oliver', 'Elijah', 'William', 'James', 'Benjamin', 'Lucas', 'Henry', 'Alexander', 
+players= ['Liam', 'Noah', 'Oliver', 'Elijah', 'William', 'James', 'Benjamin', 'Lucas', 'Henry', 'Alexander', 
 'Olivia', 'Emma', 'Ava', 'Charlotte', 'Sophia', 'Amelia', 'Isabella', 'Mia', 'Evelyn', 'Harper', 'Charlie', 'Casey', 'Stevie', 
 'Remy', 'Finley', 'Monroe', 'Jodie', 'Skyler', 'Jude']
 
@@ -42,8 +42,19 @@ players_bald = {
     'Remy': 'No', 'Finley': 'No', 'Monroe': 'Yes', 'Jodie': 'No', 'Skyler': 'Yes', 'Jude': 'No'}
 bald_options=("Yes","No")
 
-players_facial_hair ={
-    'Liam': 'No', 'Noah': 'No', 'Oliver': 'Yes', 'Elijah': 'No', 'William': 'No', 'James': 'No', 'Benjamin': 'Yes', 'Lucas': 'No', 
-    'Henry': 'Yes', 'Alexander': 'Yes', 'Charlie': 'Yes', 'Casey': 'Yes', 'Stevie': 'No', 'Remy': 'No', 'Finley': 'No', 
-    'Monroe': 'Yes', 'Jodie': 'Yes', 'Skyler': 'Yes', 'Jude': 'No'}
+players_facial_hair ={'Liam': 'Yes', 'Noah': 'No', 'Oliver': 'No', 'Elijah': 'No', 'William': 'No', 'James': 'Yes', 
+'Benjamin': 'Yes', 'Lucas': 'No', 'Henry': 'No', 'Alexander': 'No', 'Charlie': 'No', 'Casey': 'Yes', 'Stevie': 'Yes', 
+'Remy': 'Yes', 'Finley': 'Yes', 'Monroe': 'Yes', 'Jodie': 'Yes', 'Skyler': 'No', 'Jude': 'No', 'Olivia': 'No', 'Emma':
+ 'No', 'Ava': 'No', 'Charlotte': 'No', 'Sophia': 'No', 'Amelia': 'No', 'Isabella': 'No', 'Mia': 'No', 'Evelyn': 'No', 
+ 'Harper': 'No'}
 facial_hair_options=("Yes","No")
+question_list = []
+temporary_players_options =[]
+temporay_eye_colour_options =[]
+temporary_hair_colour_options=[]
+temporary_gender_options=[]
+temporary_bald_options = []
+temporary_glasses_options = []
+temporary_facial_hair_options = []
+answer_options= ("Yes", "No")
+feature_guesses = 0
