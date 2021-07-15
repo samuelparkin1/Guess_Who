@@ -1,7 +1,6 @@
 import random
 import os
-#
-#from user_data import *
+from user_data import *
 
 
 def player_name():
