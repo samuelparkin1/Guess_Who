@@ -45,8 +45,7 @@ players_facial_hair ={}
 facial_hair_options=("Yes","No")
 
 all_names = (male_names+female_names+other_names)
-
-#####################  UNCOMMENT SECTION BELOW TO CREATE NEW LISTS ###################################     
+   
 
 for i in male_names: 
     player_genders[i] = "Male"
