@@ -187,6 +187,7 @@ def facial_hair_question():
     except NameError:
         print ("unable to find user_data.py")
 
+# while the run_game is "Yes" to game will continue to play"
 run_game = "Yes"
 play_again = []
 new_game = []
@@ -205,7 +206,7 @@ while run_game == 'Yes':
                 Would you like to play?
                 Please enter Yes / Exit.\n
                         """).capitalize()
-
+    
     if userinput not in ["Yes" , "Exit"]:
         os.system('cls||clear')
         print ("Please enter Yes or Exit" )
@@ -215,37 +216,31 @@ while run_game == 'Yes':
         new_game = userinput
         os.system('cls||clear')
 
+        #This will ask the user for information out them to store in user_data.py
         while run_game == "Yes" and new_game == "Yes":
             try:
                 #clear terminal window
                 os.system('cls||clear')
-
                 #Welcome message
                 print ("Hi and welcome to Guess Who!")
                 print ("Before we move on, I just need to know a little about you.\n")
-
                 #get user name
                 player_name()
-
                 #user to enter gender 
                 user_input("What is your gender? ", "Please select from the following options: ", player_genders, genders)
-
                 #user to put in their eye colour. 
                 user_input("What colour eyes do you have? ", "Which eye colour is closest to yours: ", player_eye_colours, eye_colours)
-
                 #user to put in their hair colour. 
                 user_input("What colour hair do you have? ", "Which hair colour is closest to yours: ",player_hair_colours, hair_colours)
-
                 #ask user if they wear glasses.
                 user_input("Do you wear glasses? ","Please enter", player_glasses, glasses_options)
-
                 #ask user if they're bald.
                 user_input("Would you say you're bald? ","Please enter", players_bald, bald_options)
-
                 #ask user if they're bald.
                 user_input("Lastly, Do you have facial hair? ","Please enter", players_facial_hair, facial_hair_options)
                     #Ask the user if they're ready to play.
 
+                # Will ask the user if they want to add another player or contine. Also allows the user to exit to the main menu.    
                 while True:
                     print ("Thanks for that!\n")
                     print ("My friend, Inspector Bot, considers themselves as a real Sherlock Holmes and believe they can find anybody!")
@@ -263,54 +258,50 @@ while run_game == 'Yes':
                         break
                     elif userinput == "Exit":
                         new_game = False
-                        break 
-               
-                while play_again == "Yes":
-                        
-                    feature_guesses = 0
+                        break
 
+               #If the user has selected "Yes" the programme will create temporary list.
+               #These lists are used to eliminate possible players as the question get asked. 
+                while play_again == "Yes":
+                    #resets the guesses  
+                    feature_guesses = 0
                     # Gererate a temporary list of players.
                     temporary_player_list(players,temporary_players_options)
-
                     # Gererate a temporary list of possible eye colours.  
                     temporary_list(player_eye_colours,temporay_eye_colour_options)
-
                     # Gererate a temporary list of passible hair colours. 
                     temporary_list(player_hair_colours,temporary_hair_colour_options)
-
                     # Gererate a temporary list of passible hair colours. 
                     temporary_list(player_genders,temporary_gender_options)
-
                     # Gererate a temporary list of passible glasses options 
                     temporary_list(player_glasses,temporary_glasses_options)
-
                     # Gererate a temporary list of passible bald options. 
                     temporary_list(players_bald,temporary_bald_options)
-
                     # Gererate a temporary list of passible facial hair options.
                     temporary_list(players_facial_hair,temporary_facial_hair_options)
-
                     #This is a list of the question functions that input into the question generator.
                     question_list = [eye_question, hair_question, gender_question, bald_question, glasses_question, facial_hair_question]
                 
+                    #This will start to ask randon question while there are still questions within the question list              
                     while True:
                         try:
                             if int(feature_guesses) < 3 and len (question_list) > 1 and len(temporary_players_options) > 2:
                                 random.choice(question_list)()
-                                os.system('cls||clear')
-                                    
+                                os.system('cls||clear')                                    
                             else:
                                 if len(temporary_players_options) > 0:
                                     if name_question() == True:
-                                        break                
+                                        break
+                                #if the user has answer incorrectly to one of the questions and is unable to find the
+                                #  correct answer                 
                                 else:
                                     print("Seems like you slipped my detection")
-                                    break                     
-                    
+                                    break
+                        #to catch error if there the questions list runs out of question functions
                         except IndexError:
                             print ("I've run out of question....")
                             break
-
+                    # Allows the user to play again or exit back to the start         
                     while True:
                         userinput = input("Do you want to play again?\nYes or Exit: ").capitalize()
                         os.system('cls||clear')
@@ -324,7 +315,9 @@ while run_game == 'Yes':
                             play_again = userinput            
                             new_game = userinput
                             os.system('cls||clear')
-                            break 
+                            break
+            #This catch the error if the programme is unable to locate the user_data file.
+            #   it will notify the user of teh fault and exit the programme           
             except NameError:
                 print ("unable to find user_data.py")
                 userinput = input("Please ensure file is in the correct location.\n\n Press Enter to exit programme").capitalize()
@@ -332,7 +325,7 @@ while run_game == 'Yes':
                 run_game = False        
                 new_game = False  
 
-
+    #This will terminate the programme
     elif userinput == "Exit":
         run_game = userinput          
         new_game = userinput
