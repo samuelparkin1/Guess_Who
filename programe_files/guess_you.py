@@ -1,5 +1,6 @@
 import random
 import os
+from sys import argv
 from user_data import *
 
 def player_name():
@@ -75,7 +76,7 @@ def question_generator(question_to_user, question_function, user_data, option):
             if answer not in answer_options:
                 print ("Please type Yes or No")
             elif answer == "Yes":
-                #This loop will remove any players name that DONT match to uses answer.
+                #This loop will remove any players name that DON'T match to uses answer.
                 players_to_remove = [name for (name, value) in user_data.items() if value != option]
                 for names in players_to_remove:
                     if names in temporary_players_options:
@@ -92,7 +93,7 @@ def question_generator(question_to_user, question_function, user_data, option):
                 for names in players_to_remove:
                     if names in temporary_players_options:
                         temporary_players_options.remove(names)
-                print (temporary_players_options)
+                
                 feature_guesses += 1
     
                 break
@@ -158,7 +159,7 @@ def bald_question():
 
 # This function will choose a random glasses option from the temporary_glasses list.
 # Because this is only a Yes or No option, it will remove the function from the question list
-# so not to asked again.
+#   so not to asked again.
 def glasses_question():
     try:
         question = (f"Do you wear glasses? ")
@@ -173,7 +174,7 @@ def glasses_question():
 
 # This function will choose a random glasses option from the temporary_glasses list.
 # Because this is only a Yes or No option, it will remove the function from the question list
-# so not to asked again.
+#   so not to asked again.
 def facial_hair_question():
     try:
         question = (f"Do you have facial hair? ")
@@ -185,6 +186,15 @@ def facial_hair_question():
         print("hmm.. I can't remember if you had facial hair")
     except NameError:
         print ("unable to find user_data.py")
+
+
+
+# Checks for Bash script arguments
+
+try:
+    inspect_mode = argv[1]
+except IndexError:
+    inspect_mode =[]
 
 # while the run_game is "Yes" to game will continue to play"
 run_game = "Yes"
@@ -241,6 +251,16 @@ while run_game == 'Yes':
 
                 # Will ask the user if they want to add another player or contine. Also allows the user to exit to the main menu.    
                 while True:
+                    ## If in "inspect" mode from BASH terminal. It will display the details you have just entered.
+                    if inspect_mode == "inspect":
+                        print (f"Your name is {name}.""\n")
+                        print (f"You are a {player_genders[name]}.""\n")
+                        print (f"You have {player_eye_colours[name]} eyes.""\n")
+                        print (f"You have {player_hair_colours[name]} hair.""\n")
+                        print (f"You said {player_glasses[name]} to wearing glasses.""\n")
+                        print (f"You said {players_bald[name]} to being bald,""\n")
+                        print (f"and you said {players_facial_hair[name]} to facial hair.""\n")
+                    
                     print ("Thanks for that!\n")
                     print ("My friend, Inspector Bot, considers themselves as a real Sherlock Holmes and believe they can find anybody!")
                     print ("Inspector Bot is going to ask some random question to guess who you are.")
@@ -285,20 +305,29 @@ while run_game == 'Yes':
                     while True:
                         try:
                             if int(feature_guesses) < 3 and len (question_list) > 1 and len(temporary_players_options) > 2:
+                                # If in "inspect" mode from BASH terminal. It will display all possiple names.  
+                                if inspect_mode == "inspect":
+                                        print ("The list of potential players\n")
+                                        print (temporary_players_options)
+                                        print ("\n")                                        
                                 random.choice(question_list)()
-                                os.system('cls||clear')                                    
-                            else:
-                                if len(temporary_players_options) > 0:
+                                os.system('cls||clear')                               
+                            elif len(temporary_players_options) > 0:
+                                    if inspect_mode == "inspect":
+                                        print ("The list of potential players\n")
+                                        print (temporary_players_options)
+                                        print ("\n")
                                     if name_question() == True:
                                         break
                                 #if the user has answer incorrectly to one of the questions and is unable to find the
                                 #  correct answer                 
-                                else:
-                                    print("Seems like you slipped my detection")
-                                    break
+                            else:
+                                print("Seems like you slipped my detection")
+                                break
                         #to catch error if there the questions list runs out of question functions
-                        except IndexError:
-                            print ("I've run out of question....")
+                        except Exception as error:
+                            print ("I've to have run into in error....")
+                            print (error)
                             break
                     # Allows the user to play again or exit back to the start         
                     while True:
