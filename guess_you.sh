@@ -12,7 +12,7 @@ then
 # if the user does have Python three 
 else
   # Checks to see if the user has a programe files
-  if [ ! -e "programe_files/guesSs_you.py" ]
+  if [ ! -e "programe_files/guess_you.py" ]
   then
     echo "Unable to find files to start the programme. Please refer to help.txt documentation for troubleshooting." >&2
     exit 1
